@@ -1,0 +1,23 @@
+.headContainer {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.topBlock {
+	width: 400px;
+	height: 200px;
+	position: absolute;
+	background-color: black;
+	top: -9%;
+	left: -2%;
+}
+.botBlock {
+	width: 400px;
+	height: 200px;
+	position: absolute;
+	background-color: black;
+	bottom: -9%;
+	right: -2%;
+	z-index: -1;
+}

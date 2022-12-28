@@ -1,0 +1,13 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+}
+.textContainer {
+	width: 40%;
+}
+.anchorText {
+	width: 500px;
+	color: grey;
+	cursor: grabbing;
+	padding: 5px;
+}
