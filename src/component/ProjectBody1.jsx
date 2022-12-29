@@ -5,6 +5,8 @@ import { Col, Row } from "react-bootstrap";
 
 export default memo(function ProjectBody1(props) {
 	const projectBodyId = "projectBodyId" + props.projectBodyId + "-";
+	const reviewMode = props.reviewMode;
+
 	return (
 		<Row className="pb-5">
 			<Row>
@@ -12,12 +14,12 @@ export default memo(function ProjectBody1(props) {
 					<Image imageId={projectBodyId + 1} />
 				</Col>
 				<Col>
-					<Text textId={projectBodyId + 3} />
+					<Text textId={projectBodyId + 3} reviewMode={reviewMode} />
 				</Col>
 			</Row>
 			<Row>
 				<Col>
-					<Text textId={projectBodyId + 4} />
+					<Text textId={projectBodyId + 4} reviewMode={reviewMode} />
 				</Col>
 				<Col>
 					<Image imageId={projectBodyId + 2} />

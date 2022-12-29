@@ -6,12 +6,7 @@ import ModernPortfolio from "./component/ModernPortfolio";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <div className="experience">
-    <canvas className="experience-canvas">
-    <ThreeScene />
-    </canvas>
-  </div>
-  // <>
-  // 	<ModernPortfolio />
-  // </>
+  <>
+  	<ModernPortfolio />
+  </>
 );

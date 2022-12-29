@@ -1,9 +1,7 @@
-import { React, useState, memo, useEffect } from "react";
+import { React, useState, memo, useEffect, useContext } from "react";
 import { useQuill } from "react-quilljs";
 import "quill/dist/quill.bubble.css";
 import Draggable from "react-draggable";
-import { Resizable } from "re-resizable";
-
 import $ from "jquery";
 import "../style/Text.css";
 import "../style/delete.css";
@@ -15,10 +13,19 @@ export default memo(function Text(props) {
 	const [load, setLoad] = useState(false);
 	const [show, setShow] = useState(true);
 	const [quillWidth, setQuillWidth] = useState(300);
+	const [disableQuill, setDisableQuill] = useState(false);
 	const [browserSize, setBrowserSize] = useState({
 		width: $(window).width(),
 		height: $(window).height(),
 	});
+	const reviewMode = props.reviewMode;
+	let textStyle = { width: "fit-content" };
+	if (props.left) {
+		textStyle = { ...{ left: props.left }, ...textStyle };
+	}
+	if (props.top) {
+		textStyle = { ...{ top: props.top }, ...textStyle };
+	}
 	if (props.show !== undefined) {
 	}
 	const modules = {
@@ -44,34 +51,38 @@ export default memo(function Text(props) {
 		"list",
 		"align",
 	];
-
-	$(`#${textContainerId}`).hover(() => {
-		$(`#${textAnchorId}`).css("color", "grey");
-		$(`#delete${textAnchorId}`).css("visibility", "visible");
-	});
-	$(`#${textAnchorId}`).hover(() => {
-		$(`#${textAnchorId}`).css("color", "grey");
-		$(`#delete${textAnchorId}`).css("visibility", "visible");
-	});
-	$(`#${textContainerId}`).mouseout(() => {
-		$(`#${textAnchorId}`).css("color", "transparent");
-		$(`#delete${textAnchorId}`).css("visibility", "hidden");
-	});
-	$(`.ql-editor`).hover(() => {
-		$(`#${textAnchorId}`).css("color", "grey");
-		$(`#delete${textAnchorId}`).css("visibility", "visible");
-	});
-	$(`.ql-editor`).mouseout(() => {
-		$(`#${textAnchorId}`).css("color", "transparent");
-		$(`#delete${textAnchorId}`).css("visibility", "hidden");
-	});
-
 	const { quill, quillRef } = useQuill({
 		theme,
 		modules,
 		formats,
 		placeholder,
 	});
+	if (!reviewMode) {
+		$(`#${textContainerId}`).on("mouseenter", () => {
+			$(`#${textAnchorId}`).css("color", "grey");
+			$(`#delete${textAnchorId}`).css("visibility", "visible");
+		});
+
+		$(`#${textAnchorId}`).on("mouseenter", () => {
+			$(`#${textAnchorId}`).css("color", "grey");
+			$(`#delete${textAnchorId}`).css("visibility", "visible");
+		});
+		$(`.ql-editor`).on("mouseenter", () => {
+			$(`#${textAnchorId}`).css("color", "grey");
+			$(`#delete${textAnchorId}`).css("visibility", "visible");
+		});
+		if (disableQuill) {
+			quill.disable();
+			quill.enable();
+			setDisableQuill(false);
+		}
+	} else {
+		$(`#${textContainerId}`).off("mouseenter");
+		$(`#${textAnchorId}`).off("mouseenter");
+		$(`#${textContainerId}`).off("mouseenter");
+		$(`.ql-editor`).off("mouseenter");
+		quill.disable();
+	}
 	useEffect(() => {
 		if (quill) {
 			quill.on("text-change", (delta, oldDelta, source) => {
@@ -81,12 +92,27 @@ export default memo(function Text(props) {
 	}, [quill]);
 	useEffect(() => {
 		setLoad(!load);
+		$(`#${textContainerId}`).on("mouseout", () => {
+			$(`#${textAnchorId}`).css("color", "transparent");
+			$(`#delete${textAnchorId}`).css("visibility", "hidden");
+		});
+		$(`.ql-editor`).on("mouseout", () => {
+			$(`#${textAnchorId}`).css("color", "transparent");
+			$(`#delete${textAnchorId}`).css("visibility", "hidden");
+		});
 	}, []);
+	useEffect(() => {
+		setDisableQuill(reviewMode);
+	}, [reviewMode]);
 	if (show) {
 		return (
-			<div className="position-relative" style={{ width: "fit-content" }}>
+			<div className="position-absolute" style={textStyle}>
 				<div style={{ width: "fit-content" }}>
-					<Draggable handle=".anchorText" bounds={{ right: browserSize.width }}>
+					<Draggable
+						handle=".anchorText"
+						bounds={{ right: browserSize.width }}
+						disabled={reviewMode}
+					>
 						<div>
 							<div
 								className="delete"
@@ -102,7 +128,7 @@ export default memo(function Text(props) {
 							<div
 								style={{
 									width: quillWidth,
-									height: quillWidth,
+									height: "fit-content",
 								}}
 								id={textContainerId}
 							>

@@ -1,4 +1,5 @@
 body {
+  position: relative;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -12,7 +13,36 @@ code {
     monospace;
 }
 canvas{
+  position: absolute;
+  z-index: -1;
   /* background-color: rgba(219, 255, 212, 0.982); */
   background-image: url("../public/textures/sky.jpg");
   background-size: cover; 
+}
+/* .experience{
+  position: absolute;
+  z-index: -1;
+} */
+/* #root{
+  position: relative;
+  width: 100%;
+} */
+#chuyentrang{
+  font-family: "Roboto";
+ position: absolute;
+ left: 50%;
+ top:0;
+ transform: translateX(-50%);
+ z-index: 1;
+ background-color: transparent;
+ border-radius: 10px;
+ padding: 10px;
+ border: 0px solid rgb(91, 91, 91);
+ transition: ease .4s;
+ font-size: 150%;
+ font-weight: bold;
+ /* text-transform: uppercase; */
+}
+#chuyentrang:hover{
+  box-shadow: 1px 1px 5px #333;
 }

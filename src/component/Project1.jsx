@@ -1,16 +1,24 @@
-import { React, useState, useEffect, memo } from "react";
-import $ from "jquery";
+import { React, memo } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Resizable } from "re-resizable";
-import Draggable from "react-draggable";
 import ProjectHead1 from "./ProjectHead1";
 import ProjectBody1 from "./ProjectBody1";
+import { Row } from "react-bootstrap";
 
 export default memo(function Project1(props) {
 	return (
-		<>
-			<ProjectHead1 projectHeadId={props.projectId} />
-			<ProjectBody1 projectBodyId={props.projectId} />
-		</>
+		<Row>
+			<Row>
+				<ProjectHead1
+					projectHeadId={props.projectId}
+					reviewMode={props.reviewMode}
+				/>
+			</Row>
+			<Row>
+				<ProjectBody1
+					projectBodyId={props.projectId}
+					reviewMode={props.reviewMode}
+				/>
+			</Row>
+		</Row>
 	);
 });

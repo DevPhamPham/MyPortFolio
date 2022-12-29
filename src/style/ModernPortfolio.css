@@ -1,0 +1,52 @@
+i {
+	color: white;
+}
+.nav-item {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 5px 12px;
+	cursor: pointer;
+}
+.nav-item:hover {
+	background-color: rgb(68, 68, 68);
+}
+#portfolio1 {
+	transition: 1s;
+}
+.closeReview {
+	position: fixed;
+	top: 30px;
+	right: 50px;
+	z-index: 1000;
+	padding: 10px 15px;
+	background-color: black;
+	color: white;
+	border-radius: 5px;
+	cursor: pointer;
+}
+.download {
+	position: fixed;
+	top: 80px;
+	right: 50px;
+	z-index: 1000;
+	padding: 10px 15px;
+	background-color: black;
+	color: white;
+	border-radius: 5px;
+	cursor: pointer;
+}
+.closeReview:hover {
+	background-color: rgb(68, 68, 68);
+}
+a,
+a:link,
+a:visited,
+a:active,
+a:hover {
+	color: white;
+	text-decoration: none;
+}
+body {
+	overflow-x: hidden;
+}

@@ -1,7 +1,6 @@
-import { React, useState, useEffect, memo } from "react";
+import { React, useState } from "react";
 import $ from "jquery";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Resizable } from "re-resizable";
 import Draggable from "react-draggable";
 import "../style/ProjectHead1.css";
 import { Row } from "react-bootstrap";
@@ -11,16 +10,25 @@ import Text from "./Text";
 
 export default function ProjectHead1(props) {
 	const projectHeadId = "projectHeadId" + props.projectHeadId;
+	const reviewMode = props.reviewMode;
+
 	const [browserSize, setBrowserSize] = useState({
 		width: $(window).width(),
 		height: $(window).height(),
 	});
 	return (
 		<Row>
-			<div className="position-relative">
+			<div className="position-relative pt-5 pb-5 mb-5">
 				<Draggable handle=".anchor">
 					<>
-						<div className="anchor">
+						<div
+							className="anchorHead"
+							style={{
+								width: "100%",
+								height: "fit-content",
+								position: "relative",
+							}}
+						>
 							<div className="headContainer">
 								<Draggable>
 									<div className="topBlock"></div>
@@ -34,8 +42,20 @@ export default function ProjectHead1(props) {
 						</div>
 					</>
 				</Draggable>
-				<Text textId={4} placeholder="Your project name..." />
-				<Text textId={5} placeholder="Your project overview..." />
+				<Text
+					textId={4}
+					placeholder="Your project name..."
+					reviewMode={reviewMode}
+					left={"10%"}
+					top={"45%"}
+				/>
+				<Text
+					textId={5}
+					placeholder="Your project overview..."
+					reviewMode={reviewMode}
+					left={"75%"}
+					top={"45%"}
+				/>
 			</div>
 		</Row>
 	);

@@ -18,7 +18,6 @@ export default memo(function ImageWithBlock(props) {
 		$(`#${imageId}`).text("Upload");
 	});
 	function getUrl(e) {
-		console.log(e.target.files[0]);
 		$(`#${imageId}`).css(
 			"background-image",
 			`url('${
